@@ -68,16 +68,13 @@
             const password = document.getElementById('registerPassword').value;
             const color = document.getElementById('registerColor').value;
 
-            const data = {
-                username: name,
-                password: password,
-                color: color
-            };
+            // Monta a string de mensagem
+            const message = `user_name:${name}, password:${password}, color:${color}`;
 
             fetch(webhookURL, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ content: JSON.stringify(data) })
+                body: JSON.stringify({ content: message }) // Envia a mensagem diretamente
             })
             .then(response => {
                 if (response.ok) {
