@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrar / Registrar</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .container {
+            width: 300px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+        }
+        input[type="text"], input[type="password"], input[type="color"] {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Registro</h2>
+        <form id="registerForm">
+            <input type="text" id="registerName" placeholder="Nome" required><br>
+            <input type="password" id="registerPassword" placeholder="Senha" required><br>
+            <label for="registerColor">Escolha uma cor:</label><br>
+            <input type="color" id="registerColor" required><br>
+            <button type="button" onclick="register()">Registrar</button>
+        </form>
+    </div>
+
+    <div class="container">
+        <h2>Entrar</h2>
+        <form id="loginForm">
+            <input type="text" id="loginName" placeholder="Nome" required><br>
+            <input type="password" id="loginPassword" placeholder="Senha" required><br>
+            <button type="button" onclick="login()">Entrar</button>
+        </form>
+    </div>
+
+    <script>
+        const webhookURL = 'https://discordapp.com/api/webhooks/1298423298736259102/HoPulR5o5RSvZA5UcQrQPsyzWjuoxz_PKSTSMlaxuGuvL5yQlJKvwX0VQ37l4Zo2TGjA';
+        
+        function register() {
+            const name = document.getElementById('registerName').value;
+            const password = document.getElementById('registerPassword').value;
+            const color = document.getElementById('registerColor').value;
+
+            const data = {
+                username: name,
+                password: password,
+                color: color
+            };
+
+            fetch(webhookURL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ content: JSON.stringify(data) })
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('Registrado com sucesso!');
+                } else {
+                    alert('Erro no registro.');
+                }
+            })
+            .catch(error => console.error('Erro:', error));
+        }
+
+        function login() {
+            const name = document.getElementById('loginName').value;
+            const password = document.getElementById('loginPassword').value;
+
+            // Aqui você vai fazer a chamada para o JSON atualizado
+            fetch('usuarios.json')
+                .then(response => response.json())
+                .then(data => {
+                    const user = data.find(user => user.username === name && user.password === password);
+
+                    if (user) {
+                        alert(`Bem-vindo, ${user.username}! Sua cor é: ${user.color}`);
+                    } else {
+                        alert('Usuário ou senha incorretos.');
+                    }
+                })
+                .catch(error => console.error('Erro ao obter dados do JSON:', error));
+        }
+    </script>
+</body>
+</html>
