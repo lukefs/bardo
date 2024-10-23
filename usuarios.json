@@ -1,1 +1,22 @@
-[]
+[
+    {
+        "username": "A",
+        "password": "b",
+        "color": "#000000"
+    },
+    {
+        "username": "A",
+        "password": "h",
+        "color": "#000000"
+    },
+    {
+        "username": "B",
+        "password": "h",
+        "color": "#ff0000"
+    },
+    {
+        "username": "Z",
+        "password": "z1",
+        "color": "#00ff00"
+    }
+]
