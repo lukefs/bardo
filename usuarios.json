@@ -1,5 +1,18 @@
 [
-    { "username": "Bardo", "password": "a" },
-    { "username": "guerreiro", "password": "U2FsdGVkX1xUQVBBQkZDRGQ=" },
-    { "username": "mago", "password": "U2FsdGVkX1hQZXd5TFI5" }
+    {
+        "username": "Bardo",
+        "password": "a"
+    },
+    {
+        "username": "guerreiro",
+        "password": "U2FsdGVkX1xUQVBBQkZDRGQ="
+    },
+    {
+        "username": "mago",
+        "password": "U2FsdGVkX1hQZXd5TFI5"
+    },
+    {
+        "username": "luke",
+        "password": "maskaiko"
+    }
 ]
