@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo das Bolas</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Arquivo CSS separado -->
+</head>
+<body>
+
+    <div class="header">
+        <div><img src="timer.png" alt="Relógio" width="20px"><span id="time">15</span>s</div>
+        <div><img src="coin.png" alt="Moedas" width="20px"><span id="coins">0</span></div>
+        <div>Pontos: <span id="score">0</span></div> 
+    </div>
+
+    <div class="game-container" id="gameContainer"></div>
+
+    <div class="button-container">
+        <button class="btn" id="startButton">Iniciar</button>
+    </div>
+
+    
+
+    <div class="score-card" id="scoreCard">
+        <h2>Fim de Jogo!</h2>
+        <p>Você marcou <span id="finalScore">0</span> pontos.</p>
+        <p>Você coletou <span id="finalCoins">0</span> moedas.</p>
+        <button id="restartButton">Jogar Novamente</button>
+        <button id="closeButton">X</button> <!-- Botão para fechar o card -->
+    </div>
+
+    <div id="overlay" style="display: none;"></div> <!-- Sobreposição -->
+
+    <audio id="bgMusic" loop>
+        <source src="musica.mp3" type="audio/mpeg">
+        Seu navegador não suporta áudio.
+    </audio>
+    <audio id="coinSound">
+        <source src="cllick.mp3" type="audio/mpeg">
+        Seu navegador não suporta áudio.
+    </audio>
+    <audio id="ballClickSound">
+        <source src="cllick.mp3" type="audio/mpeg">
+        Seu navegador não suporta áudio.
+    </audio>
+    <audio id="timeUpSound">
+        <source src="time.mp3" type="audio/mpeg">
+        Seu navegador não suporta áudio.
+    </audio>
+
+    <script src="script.js"></script> <!-- Arquivo JS separado -->
+</body>
+</html>
