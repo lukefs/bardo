@@ -3,108 +3,262 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Entrar / Registrar</title>
+    <title>Bardo Games - Login</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: Arial, sans-serif;
-            text-align: center;
+            color: #f0a500;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            background: linear-gradient(135deg, #0c0c0c, #697468);
         }
+
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
         .container {
-            width: 300px;
-            margin: auto;
+            background-color: #111;
             padding: 20px;
-            border: 1px solid #ccc;
             border-radius: 10px;
-            background-color: #f9f9f9;
-        }
-        input[type="text"], input[type="password"], input[type="color"] {
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            text-align: center;
             width: 90%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+            max-width: 400px;
+            animation: fadeIn 1s ease-in-out;
         }
-        button {
-            width: 90%;
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .title {
+            font-size: 2em;
+            margin-bottom: 20px;
+            font-family: 'Georgia', serif;
+        }
+
+        .character {
+            margin: 0 auto 20px;
+            width: 70%;
+            max-width: 200px;
+            height: auto;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        input[type="text"], input[type="password"] {
+            margin: 20px;
             padding: 10px;
-            margin: 10px 0;
-            background-color: #4CAF50;
-            color: white;
             border: none;
             border-radius: 5px;
+            background-color: #4b4b4b;
+            color: white;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="text"]:focus, input[type="password"]:focus {
+            background-color: #5d5d5d;
+            outline: none;
+            box-shadow: 0 0 10px rgba(240, 165, 0, 0.6);
+        }
+
+        input[type="text"]::placeholder, input[type="password"]::placeholder {
+            color: #c7c7c7;
+        }
+
+        .btn {
+            background-color: #f0a500;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            color: white;
+            margin: 20px;
+            font-size: 16px;
             cursor: pointer;
         }
-        button:hover {
-            background-color: #45a049;
+
+        .btn:hover {
+            background-color: #e69500;
+        }
+
+        .link {
+            margin-top: 10px;
+            color: #f0a500;
+            font-size: 14px;
+            text-decoration: none;
+        }
+
+        .link:hover {
+            text-decoration: underline;
+        }
+
+        .error {
+            color: red;
+            margin-top: 10px;
+            font-size: 14px;
+            display: none;
+        }
+
+        /* Estilos para o jogo */
+        .game-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .ball {
+            width: 50px; /* Ajuste o tamanho conforme necessário */
+            height: 50px; /* Ajuste o tamanho conforme necessário */
+            background-color: #00ff99;
+            border-radius: 50%;
+            position: absolute;
+            cursor: pointer;
+        }
+
+        .ball {
+            transition: background-color 0.2s; /* Transição suave para mudança de cor */
+        }
+
+        .ball:hover {
+            background-color: #ffcc00; /* Cor ao passar o mouse */
         }
     </style>
-    <meta name="google-adsense-account" content="ca-pub-5572474597106679">
 </head>
 <body>
+    <div id="particles-js"></div>
     <div class="container">
-        <h2>Registro</h2>
-        <form id="registerForm">
-            <input type="text" id="registerName" placeholder="Nome" required><br>
-            <input type="password" id="registerPassword" placeholder="Senha" required><br>
-            <label for="registerColor">Escolha uma cor:</label><br>
-            <input type="color" id="registerColor" required><br>
-            <button type="button" onclick="register()">Registrar</button>
-        </form>
-    </div>
-
-    <div class="container">
-        <h2>Entrar</h2>
+        <h1 class="title">Bardo Games</h1>
+        <img src="bardo.png" alt="Personagem" class="character">
         <form id="loginForm">
-            <input type="text" id="loginName" placeholder="Nome" required><br>
-            <input type="password" id="loginPassword" placeholder="Senha" required><br>
-            <button type="button" onclick="login()">Entrar</button>
+            <input type="text" id="username" placeholder="Nome" required>
+            <input type="password" id="password" placeholder="Senha" required>
+            <button type="submit" class="btn">ENTRAR</button>
         </form>
+        <p id="errorMsg" class="error">Usuário ou senha incorretos!</p>
+        <a href="https://discord.gg/Sces2Sf2kr" class="link">Registre-se em nosso discord</a>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        const webhookURL = 'https://discordapp.com/api/webhooks/1298423298736259102/HoPulR5o5RSvZA5UcQrQPsyzWjuoxz_PKSTSMlaxuGuvL5yQlJKvwX0VQ37l4Zo2TGjA';
-        
-        function register() {
-            const name = document.getElementById('registerName').value;
-            const password = document.getElementById('registerPassword').value;
-            const color = document.getElementById('registerColor').value;
+        let users = []; // Inicializa a variável para armazenar usuários
 
-            // Monta a string de mensagem
-            const message = `user_name:${name}, password:${password}, color:${color}`;
-
-            fetch(webhookURL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ content: message }) // Envia a mensagem diretamente
-            })
-            .then(response => {
-                if (response.ok) {
-                    alert('Registrado com sucesso!');
-                } else {
-                    alert('Erro no registro.');
+        // Função para buscar dados do JSON
+        async function fetchUsers() {
+            try {
+                const response = await fetch('usuarios.json');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
                 }
-            })
-            .catch(error => console.error('Erro:', error));
+                users = await response.json(); // Armazena os dados do JSON na variável users
+            } catch (error) {
+                console.error('Erro ao buscar usuários:', error);
+            }
         }
 
-        function login() {
-            const name = document.getElementById('loginName').value;
-            const password = document.getElementById('loginPassword').value;
+        // Chama a função para buscar os usuários
+        fetchUsers();
 
-            // Aqui você vai fazer a chamada para o JSON atualizado
-            fetch('usuarios.json')
-                .then(response => response.json())
-                .then(data => {
-                    const user = data.find(user => user.username === name && user.password === password);
+        const loginForm = document.getElementById('loginForm');
+        const errorMsg = document.getElementById('errorMsg');
 
-                    if (user) {
-                        alert(`Bem-vindo, ${user.username}! Sua cor é: ${user.color}`);
-                    } else {
-                        alert('Usuário ou senha incorretos.');
-                    }
-                })
-                .catch(error => console.error('Erro ao obter dados do JSON:', error));
-        }
+        // Função para verificar o login
+        loginForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // Verificação no JSON carregado
+            const user = users.find(user => user.username === username && user.password === password);
+
+            if (user) {
+                // Redireciona para o jogo com o nome do usuário como parâmetro
+                window.location.href = `jogo.html?username=${encodeURIComponent(username)}`;
+            } else {
+                // Exibe a mensagem de erro
+                errorMsg.style.display = 'block';
+            }
+        });
+
+        // Partículas de fundo
+        particlesJS("particles-js", {
+            particles: {
+                number: { value: 80 },
+                color: { value: "#ffffff" },
+                shape: {
+                    type: "circle",
+                    stroke: { width: 0, color: "#000000" },
+                    polygon: { nb_sides: 5 },
+                },
+                opacity: { value: 0.5, random: false },
+                size: { value: 3, random: true }, // Ajustado para 3
+                line_linked: { 
+                    enable: true, 
+                    distance: 150, 
+                    color: "#ffffff", 
+                    opacity: 0.4, 
+                    width: 1 
+                },
+                move: { 
+                    enable: true, 
+                    speed: 6, 
+                    direction: "none", 
+                    random: false, 
+                    straight: false, 
+                    out_mode: "out", 
+                    bounce: false, 
+                    attract: { 
+                        enable: false, 
+                        rotateX: 600, 
+                        rotateY: 1200 
+                    } 
+                },
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: { enable: true, mode: "repulse" },
+                    onclick: { enable: true, mode: "push" },
+                    resize: true,
+                },
+                modes: {
+                    grab: { distance: 400, line_linked: { opacity: 1 } },
+                    bubble: { distance: 400, size: 40, duration: 2, opacity: 8, speed: 3 },
+                    repulse: { distance: 200, duration: 0.4 },
+                    push: { particles_nb: 4 },
+                    remove: { particles_nb: 2 },
+                },
+            },
+            retina_detect: true,
+        });
     </script>
 </body>
 </html>
