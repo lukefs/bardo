@@ -21,7 +21,7 @@
     },
     {
         "username": "gil",
-        "password": "tedao"
+        "password": "ted\u00e3o"
     },
     {
         "username": "muie",
@@ -30,5 +30,17 @@
     {
         "username": "muke",
         "password": "mas"
+    },
+    {
+        "username": "gil",
+        "password": "tedao"
+    },
+    {
+        "username": "gilrainhadiva",
+        "password": "tedao"
+    },
+    {
+        "username": "batman",
+        "password": "vulgotintin"
     }
 ]
